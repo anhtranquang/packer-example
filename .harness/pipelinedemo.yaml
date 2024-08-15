@@ -1,0 +1,26 @@
+pipeline:
+  name: pipeline-demo
+  identifier: pipelinedemo
+  tags: {}
+  template:
+    templateRef: buildpackertemplate
+    versionLabel: build-packer
+    templateInputs:
+      stages:
+        - stage:
+            identifier: buildami
+            type: CI
+            spec:
+              execution:
+                steps:
+                  - step:
+                      identifier: Clone_source_code
+                      type: GitClone
+                      spec:
+                        repoName: <+input>
+            variables:
+              - name: PKR_VAR_ami_name
+                type: String
+                value: <+input>
+  projectIdentifier: default_project
+  orgIdentifier: default
